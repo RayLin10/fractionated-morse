@@ -2,25 +2,26 @@ import java.util.*;
 
 public class fractionatedMorse {
 
-    public static String encode (String plaintext, String key, Hashtable<> cipherMap, Hashtable<> morseKey) {
+    public static String encode (String plaintext, Hashtable cipherMap, Hashtable morseKey) {
         String morse = "", output = "";
 
-        for (x = 0; x < plaintext.length(), x++) {
+        for (int x = 0; x < plaintext.length(); x++) {
             morse += morseKey.get(plaintext.charAt(x));
             if (x != plaintext.length() - 1)
                 morse += "x";
+            if (Character.getNumericValue(plaintext.charAt(x)) == 32)
+                morse += "x";
         }
 
-        while ((morse.length() % 3) != 0)
-            morse += "x"
+        while ((morse.length() % 3) != 0) {
+            morse += "x";
+        }
 
-
-
-        return output;
+        return morse;
     }
 
-    public static String decode (String ciphertext, String key, Hashtable<> cipherMap, Hashtable<> morseKey) {
-        String output = '';
+    public static String decode (String ciphertext, Hashtable cipherMap, Hashtable morseKey) {
+        String output = "";
 
 
 
@@ -50,24 +51,25 @@ public class fractionatedMorse {
             'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 
             'Z', '.', ',', ':', '"', '\'', '!', '?', '@', '-', ';', '(', ')', '=', '1', 
             '2', '3', '4', '5', '6', '7', '8', '9', '0'};
-        String[] morseCode = new String[] {'.-', '-...', '-.-.', '-..', '.', '..-.', 
-            '--.', '....', '..', '.---', '-.-', '.-..', '--', '-.', '---', '.--.', '--.-', 
-            '.-.', '...', '-', '..-', '...-', '.--', '-..-'. '-.--', '--..', '.-.-.-'. 
-            '--..--', '---...', '.-..-.', '.----.', '-.-.--', '..--..', '.--.-.', '-....-', 
-            '-.-.-.', '-.--.', '-.--.-', '-...-', '.----', '..---', '...--', '....-', 
-            '.....', '-....', '--...', '...--', '----.', '-----'};
-        Hashtable<char, String> morseKey = new Hashtable<>(49, 1.0f);
-        for (x = 0; x < 49, x++) {
-            table.put(textChar[x], morseCode[x]);
+        String[] morseCode = new String[] {".-", "-...", "-.-.", "-..", ".", "..-.", 
+            "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", 
+            ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..", ".-.-.-", 
+            "--..--", "---...", ".-..-.", ".----.", "-.-.--", "..--..", ".--.-.", "-....-", 
+            "-.-.-.", "-.--.", "-.--.-", "-...-", ".----", "..---", "...--", "....-", 
+            ".....", "-....", "--...", "...--", "----.", "-----"};
+        Hashtable<Character, String> morseKey = new Hashtable<>(49, 1.0f);
+        for (int x = 0; x < 49; x++) {
+            morseKey.put(textChar[x], morseCode[x]);
         }
 
         String[] mapConstant = new String[] {"...", "..-", "..x", ".-.", ".--", ".-x", 
             ".x.", ".x-", ".xx", "-..", "-.-", "-.x", "--.", "---", "--x", "-x.", "-x-", 
             "-xx", "x..", "x.-", "x.x", "x-.", "x--", "x-x", "xx.", "xx-"};
-        Hashtable<char, String> map = new Hashtable<>(26, 1.0f);
-        for (x = 0; x < 26; x++) {
-            table.put(key.charAt(x), mapConstant[x]);
+        Hashtable<Character, String> map = new Hashtable<>(26, 1.0f);
+        for (int x = 0; x < 26; x++) {
+            map.put(key.charAt(x), mapConstant[x]);
         }
 
+        System.out.println(encode(inputText, map, morseKey));
     }
 }
