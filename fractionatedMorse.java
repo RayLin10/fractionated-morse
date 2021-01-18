@@ -2,7 +2,7 @@ import java.util.*;
 
 public class fractionatedMorse {
 
-    public static String encode (String plaintext, Hashtable morseKey, Hashtable cipherMap) {
+    public static String encode (String plaintext, Hashtable morseKey, Hashtable cipherMap, boolean verbose) {
         String morse = "", output = "";
 
         for (int x = 0; x < plaintext.length(); x++) {
@@ -13,33 +13,60 @@ public class fractionatedMorse {
                 morse += morseKey.get(currentChar);
                 if (x != plaintext.length() - 1)
                     morse += "x";
+                if (verbose) {
+                    System.out.println(currentChar + " -> " + "\"" + morseKey.get(currentChar) + "\"");
+                    System.out.println("Current Morse: " + morse);
+                }
             }
         }
-
-        System.out.println("Morse: " + morse);
 
         while ((morse.length() % 3) != 0) {
             morse += "x";
         }
 
+        if (verbose)
+            System.out.println("----------------------------------------------------------------------------------------------------");
+
+        System.out.println("Morse: " + morse);
+
+        if (verbose)
+            System.out.println("----------------------------------------------------------------------------------------------------");
+
         for (int x = 0; x < morse.length(); x += 3) {
             String compare = morse.substring(x, x + 3);
             output += cipherMap.get(compare);
+            if (verbose) {
+                System.out.println("\"" + compare + "\"" + " -> " + cipherMap.get(compare));
+                System.out.println("Current Ciphertext: " + output);
+            }
         }
+
+        if (verbose)
+            System.out.println("----------------------------------------------------------------------------------------------------");
 
         System.out.println("Ciphertext: " + output);
 
         return output;
     }
 
-    public static String decode (String ciphertext, Hashtable morseKey, Hashtable cipherMap) {
+    public static String decode (String ciphertext, Hashtable morseKey, Hashtable cipherMap, boolean verbose) {
         String morse = "", output = "";
 
         for (int x = 0; x < ciphertext.length(); x++) {
             morse += cipherMap.get(ciphertext.charAt(x));
+            if (verbose) {
+                System.out.println(ciphertext.charAt(x) + " -> " + "\"" + cipherMap.get(ciphertext.charAt(x)) + "\"");
+                System.out.println("Current Morse: " + morse);
+            }
         }
 
+        if (verbose)
+            System.out.println("----------------------------------------------------------------------------------------------------");
+
         System.out.println("Morse: " + morse);
+
+        if (verbose)
+            System.out.println("----------------------------------------------------------------------------------------------------");
 
         while (morse.charAt(morse.length() - 1) == 'x') {
             morse = morse.substring(0, morse.length() - 1);
@@ -49,6 +76,10 @@ public class fractionatedMorse {
             int index = morse.indexOf("x");
             String tempMorse = morse.substring(0, index);
             output += morseKey.get(tempMorse);
+            if (verbose) {
+                System.out.println("\"" + tempMorse + "\"" + " -> " + morseKey.get(tempMorse));
+                System.out.println("Current Plaintext: " + output);
+            }
             if (morse.charAt(index + 1) == 'x') {
                 output += " ";
                 morse = morse.substring(index + 2);
@@ -58,6 +89,13 @@ public class fractionatedMorse {
         }
 
         output += morseKey.get(morse);
+        if (verbose) {
+                System.out.println("\"" + morse + "\"" + " -> " + morseKey.get(morse));
+                System.out.println("Current Plaintext: " + output);
+            }
+
+        if (verbose)
+            System.out.println("----------------------------------------------------------------------------------------------------");
 
         System.out.println("Plaintext: " + output);
 
@@ -66,11 +104,11 @@ public class fractionatedMorse {
 
     public static void main (String[] args) {
 
-        if (args.length != 3) {
+        if (args.length < 3) {
             System.exit(0);
         }
 
-        boolean encode = false, decode = false;
+        boolean encode = false, decode = false, verbose = false;
         String key = args[1]; 
         String inputText = args[2];
 
@@ -80,7 +118,11 @@ public class fractionatedMorse {
         if (args[0].equals("decode")) {
             decode = true;
         }
-
+        if (args.length > 3)
+            if (args[3].equals("verbose")) {
+                verbose = true;
+            }
+        
         inputText = inputText.toUpperCase();
         key = key.toUpperCase();
 
@@ -93,7 +135,7 @@ public class fractionatedMorse {
             ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..", ".-.-.-", 
             "--..--", "---...", ".-..-.", ".----.", "-.-.--", "..--..", ".--.-.", "-....-", 
             "-.-.-.", "-.--.", "-.--.-", "-...-", ".----", "..---", "...--", "....-", 
-            ".....", "-....", "--...", "...--", "----.", "-----"};
+            ".....", "-....", "--...", "---..", "----.", "-----"};
         Hashtable<Character, String> morseKey = new Hashtable<>(49, 1.0f);
         for (int x = 0; x < 49; x++) {
             morseKey.put(textChar[x], morseCode[x]);
@@ -117,10 +159,12 @@ public class fractionatedMorse {
 
         System.out.println("Input: " + inputText);
         System.out.println("Key: " + key);
+        if (verbose)
+            System.out.println("----------------------------------------------------------------------------------------------------");
 
         if (encode == true) 
-            encode(inputText, morseKey, reverseMap);
+            encode(inputText, morseKey, reverseMap, verbose);
         if (decode == true)
-            decode(inputText, reverseMorse, map);
+            decode(inputText, reverseMorse, map, verbose);
     }
 }
