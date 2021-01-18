@@ -90,12 +90,10 @@ public class fractionatedMorse {
 
         output += morseKey.get(morse);
         if (verbose) {
-                System.out.println("\"" + morse + "\"" + " -> " + morseKey.get(morse));
-                System.out.println("Current Plaintext: " + output);
-            }
-
-        if (verbose)
+            System.out.println("\"" + morse + "\"" + " -> " + morseKey.get(morse));
+            System.out.println("Current Plaintext: " + output);
             System.out.println("----------------------------------------------------------------------------------------------------");
+            }
 
         System.out.println("Plaintext: " + output);
 
@@ -126,6 +124,11 @@ public class fractionatedMorse {
         inputText = inputText.toUpperCase();
         key = key.toUpperCase();
 
+        System.out.println("Input: " + inputText);
+        System.out.println("Key: " + key);
+        if (verbose)
+            System.out.println("----------------------------------------------------------------------------------------------------");
+
         char[] textChar = new char[] {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 
             'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 
             'Z', '.', ',', ':', '"', '\'', '!', '?', '@', '-', ';', '(', ')', '=', '1', 
@@ -151,14 +154,14 @@ public class fractionatedMorse {
         Hashtable<Character, String> map = new Hashtable<>(26, 1.0f);
         for (int x = 0; x < 26; x++) {
             map.put(key.charAt(x), mapConstant[x]);
+            if (verbose)
+                System.out.println(key.charAt(x) + " | " + "\"" + mapConstant[x] + "\"");
         }
         Hashtable<String, Character> reverseMap = new Hashtable<>(26, 1.0f);
         for (int x = 0; x < 26; x++) {
             reverseMap.put(mapConstant[x], key.charAt(x));
         }
 
-        System.out.println("Input: " + inputText);
-        System.out.println("Key: " + key);
         if (verbose)
             System.out.println("----------------------------------------------------------------------------------------------------");
 
