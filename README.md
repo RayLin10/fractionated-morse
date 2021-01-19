@@ -36,7 +36,7 @@ Verbose Examples
 $ make run ARGS="encode KQIVPABOSGYTDJZHFXCWERMLUN 'A TEST' verbose"
 Input: A TEST
 Key: KQIVPABOSGYTDJZHFXCWERMLUN
---------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 K | "..."
 Q | "..-"
 I | "..x"
@@ -94,7 +94,7 @@ Ciphertext: ALBIX
 $ make run ARGS="decode KQIVPABOSGYTDJZHFXCWERMLUN ALBIX verbose"
 Input: ALBIX
 Key: KQIVPABOSGYTDJZHFXCWERMLUN
---------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 K | "..."
 Q | "..-"
 I | "..x"
