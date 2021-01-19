@@ -25,12 +25,12 @@ public class fractionatedMorse {
         }
 
         if (verbose)
-            System.out.println("----------------------------------------------------------------------------------------------------");
+            System.out.println("--------------------------------------------------------------------------------");
 
         System.out.println("Morse: " + morse);
 
         if (verbose)
-            System.out.println("----------------------------------------------------------------------------------------------------");
+            System.out.println("--------------------------------------------------------------------------------");
 
         for (int x = 0; x < morse.length(); x += 3) {
             String compare = morse.substring(x, x + 3);
@@ -42,7 +42,7 @@ public class fractionatedMorse {
         }
 
         if (verbose)
-            System.out.println("----------------------------------------------------------------------------------------------------");
+            System.out.println("--------------------------------------------------------------------------------");
 
         System.out.println("Ciphertext: " + output);
 
@@ -61,12 +61,12 @@ public class fractionatedMorse {
         }
 
         if (verbose)
-            System.out.println("----------------------------------------------------------------------------------------------------");
+            System.out.println("--------------------------------------------------------------------------------");
 
         System.out.println("Morse: " + morse);
 
         if (verbose)
-            System.out.println("----------------------------------------------------------------------------------------------------");
+            System.out.println("--------------------------------------------------------------------------------");
 
         while (morse.charAt(morse.length() - 1) == 'x') {
             morse = morse.substring(0, morse.length() - 1);
@@ -92,7 +92,7 @@ public class fractionatedMorse {
         if (verbose) {
             System.out.println("\"" + morse + "\"" + " -> " + morseKey.get(morse));
             System.out.println("Current Plaintext: " + output);
-            System.out.println("----------------------------------------------------------------------------------------------------");
+            System.out.println("--------------------------------------------------------------------------------");
             }
 
         System.out.println("Plaintext: " + output);
@@ -127,7 +127,7 @@ public class fractionatedMorse {
         System.out.println("Input: " + inputText);
         System.out.println("Key: " + key);
         if (verbose)
-            System.out.println("----------------------------------------------------------------------------------------------------");
+            System.out.println("--------------------------------------------------------------------------------");
 
         char[] textChar = new char[] {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 
             'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 
@@ -163,7 +163,7 @@ public class fractionatedMorse {
         }
 
         if (verbose)
-            System.out.println("----------------------------------------------------------------------------------------------------");
+            System.out.println("--------------------------------------------------------------------------------");
 
         if (encode == true) 
             encode(inputText, morseKey, reverseMap, verbose);
